@@ -1,0 +1,727 @@
+<html><head>
+   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Working with Garmin - Interface topics
+   </title>
+</head>
+<body bgcolor="#F0F0EE">
+
+<h2>Working with the Garmin Interface</h2>
+
+<b>Table of Contents</b>
+<ul>
+<li><a href="#intro">Introduction</a>
+</li><li><a href="#hardware">Hardware connection</a>
+</li><li><a href="#nmea">NMEA mode</a>
+</li><li><a href="#garmin">Garmin mode</a>
+</li><li><a href="#beacon">DGPS mode</a>
+</li><li><a href="#text">Text mode</a>
+</li></ul>
+
+<a name="intro">
+<h3>Introduction</h3></a>
+
+All Garmin gps receivers support a computer interface.  This can be used to
+backup the waypoints and routes on a computer and to provide real time
+display information on a computer screen.  In addition Garmin supports
+differential gps input signals.  The modes supported by Garmin receivers
+are given in the table below.
+
+<p> 
+</p><center>All of the Interface Modes</center>
+<table border="">
+<tbody><tr>
+<th>Interface Mode</th>
+<th>38/40/45XL</th>
+<th>12/12XL/48</th>
+<th>III/III+</th>
+<th>E-map</th>
+<th>E-trex</th>
+<th>Notes</th>
+</tr>
+
+<tr>
+<td>None</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>.</td>
+</tr>
+<tr>
+<td>Garmin</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>AKA GRMN/GRMN</td>
+</tr>
+
+<tr>
+<td>None/NMEA</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>NMEA out 0183 2.0</td>
+</tr>
+
+<tr>
+<td>NMEA/NMEA</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>NMEA in/out</td>
+</tr>
+
+<tr>
+<td>Garmin DGPS</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Has Garmin Interface control</td>
+</tr>
+
+<tr>
+<td>RTCM/NMEA</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>.</td>
+</tr>
+
+<tr>
+<td>RTCM/None</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>DGPS input only</td>
+</tr>
+
+<tr>
+<td>Text Out</td>
+<td>N</td>
+<td>N</td>
+<td>III+, 12Map</td>
+<td>Y</td>
+<td>Y</td>
+<td>1200 2400 4800 9600</td>
+</tr>
+
+<tr>
+<td>RTCM/Text</td>
+<td>N</td>
+<td>N</td>
+<td>III+, 12Map</td>
+<td>Y</td>
+<td>Y</td>
+<td>.</td>
+</tr>
+<tr>
+<td>NMEA 0180, 0182, 0183 1.5</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+<td>.</td>
+</tr>
+
+</tbody></table>
+
+<p>Be sure that you have selected the correct mode and baud rate for
+the program or unit you are trying to interface with.  This is the
+main problem with interface failures.  For all moving map programs you
+will likely need NMEA mode with the baud rate set to 4800.  For
+programs that upload and download data you should probably be in
+Garmin mode with the baud rate set to 9600.  Some digital cameras will
+need text mode with a baud rate of 9600.  In all cases set the data
+width to 8, no parity, and 1 stop bit.  Make sure the interface mode
+is selected in the program and the correct com port is selected.
+
+<a name="hardware">
+</a></p><h3><a name="hardware">Hardware Connection</a></h3>
+
+The hardware interface for Garmin units meets the NMEA requirements
+and is sufficient to drive 3 NMEA loads.  It is also compatible with
+most computer serial ports using RS232 protocols.  The interface speed
+can be adjusted as needed by the particular interface but it usually
+set automatically to the appropriate setting when the interface
+selection is made.  There is only a data in and data out line with
+ground.  There are are no handshake lines nor should you attempt to
+set up a software handshake using xon/xoff as the unit does not
+recognize this and may interfere with binary data uploads and
+downloads.
+
+<p>In order to use the hardware interface you will need a cable.  See the 
+accessories chapter for the available cables.  In some dedicated applications
+you may need to wire your own or perhaps you would just prefer to do that.
+The Garmin cable connector shown below will work for all of the handheld
+gps units except the etrex and emap. 
+</p><center><img src="garmin%20proprietary%20interface_files/asmbly.gif"></center>
+
+<p>Garmin gps receivers may be used to interface with other NMEA devices
+such as autopilots, fishfinders, or even another gps receivers.  They
+can also listen to Differential Beacon Receivers that can send data using
+the RTCM SC-104 standard.
+
+</p><p>Some of the latest computers no longer include a serial port but only
+a USB port.  Garmin receivers are known to work with Serial to USB adapters
+and serial ports attached via the pcmcia (pc card) adapter.
+
+<a name="nmea">
+</a></p><h3><a name="nmea">NMEA</a></h3>
+
+The National Marine Electronics Association has developed a
+specification that defines the interface between various marine
+electronic equipment.  The standard permits marine electronics to send
+information to computers and to other marine equipment.  GPS receiver
+communication is defined within this specification. Most computer
+programs that provide real time position information understand and
+expect data to be in NMEA format. This data includes the complete PVT
+(position, velocity, time) solution computed by the GPS receiver. The
+idea of NMEA is to send a line of data called a sentence that is
+totally self contained and independent from other sentences.  There
+are standard sentences for each device category and there is also the
+ability to define proprietary sentences for use by the individual
+company.  All of the standard sentences have a two letter prefix that
+defines the device that uses that sentence type.  For gps receivers
+the prefix is GP.  This is followed by a three letter sequence that
+defines the sentence contents.  In addition NMEA permits hardware
+manufactures to define their own proprietary sentences for whatever
+purpose they see fit.  All proprietary sentences begin with the letter
+P and are followed with a letter that identifies the manufacturer
+controlling that sentence.  For Garmin this would be a G.
+
+<p>Each sentence begins with a '$' and ends with a carriage return/line feed
+sequence.  The data is contained within this single line with data
+items separated by a comma.  The data itself is just ascii text and
+may extend over multiple sentences in certain specialized instances but
+is normally fully contained in one variable length sentence. An
+example sentence might look like:
+</p><pre> $GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*42
+
+With an interpretation as follows:
+
+     GGA - Global Positioning System Fix Data
+     123519       Fix taken at 12:35:19 UTC
+     4807.038,N   Latitude 48 deg 07.038' N
+     01131.000,E  Longitude 11 deg 31.000' E
+     1            Fix quality: 0 = invalid
+                               1 = GPS fix
+                               2 = DGPS fix
+     08           Number of satellites being tracked
+     0.9          Horizontal dilution of position
+     545.4,M      Altitude, Meters, above mean sea level
+     46.9,M       Height of geoid (mean sea level) above WGS84
+                      ellipsoid
+     (empty field) time in seconds since last DGPS update
+     (empty field) DGPS station ID number
+     *42          the checksum data, always begins with *
+</pre>
+
+Each Data type would have its own interpretation that is defined in the
+NMEA standard.  This particular sentence provides essential fix data.
+Other sentences may repeat some of the same information but will also
+supply new data.  Whatever is reading the data can watch for the data
+sentence that it is interested in and simply ignore whatever sentences
+that is doesn't care about.  In the NMEA standard there are no commands
+to indicate that the gps should do something different.  Instead each
+receiver just sends all of the data and expects much of it to be ignored.
+On NMEA input the receiver stores information based on interpreting the
+sentence itself.  While some Garmin receivers accept NMEA input this
+can only be used to update a waypoint or similar task and not to send
+a command to the unit.  There is no way to indicate whether the sentence
+is being read correctly or to re-send some data you didn't get.  Instead
+the receiving unit just checks the checksum and ignores the data if
+the checksum isn't correct figuring it will be sent again sometime later.
+No error can be generated to the remote system.
+
+<p>The NMEA standard has been around for many years and has undergone
+several revisions.  The protocol has changed and the number and types
+of sentences may be different depending on the revision. All Garmin
+receivers understand the latest standard which is called: 0183 version
+2.0.  This standard dictates a transfer rate of 4800 baud. Some Garmin
+receivers also understand older standards.  The oldest standard was
+0180 followed by 0182 which transferred data at 1200 baud.  An earlier
+version of 0183 called version 1.5 is also understood by some Garmin
+receivers.  Some Garmin units can be set to 9600 for NMEA output but
+this is only recommended if you have determined that 4800 works ok and
+then you can try to set it faster.
+
+</p><p>If you are interfacing a Garmin unit to another device, including a
+computer program, you need to insure that the receiving unit is given
+all of the sentences that it needs.  If it needs a sentence that Garmin
+does not send then the interface to that unit is likely to fail.  The
+sentences sent by Garmin receivers include:
+
+</p><p>NMEA 2.0
+</p><ul>
+<li>GPBOD bearing, origin to destination - earlier G-12's do not transmit this
+</li><li>GPGGA fix data
+</li><li>GPGLL Lat/Lon data - earlier G-12's do not transmit this
+</li><li>GPGSA overall satellite reception data
+</li><li>GPGSV detailed satellite data
+</li><li>GPRMB minimum recommended data when following a route
+</li><li>GPRMC minimum recommended data
+</li><li>GPRTE route data
+</li><li>GPWPL waypoint data (this is bidirectional)
+</li></ul>
+
+<p>NMEA 1.5 - some units do not support version 1.5
+</p><ul>
+<li>GPBOD bearing origin to destination - earlier G-12's do not send this
+</li><li>GPBWC bearing to waypoint using great circle route.
+</li><li>GPGLL lat/lon - earlier G-12's do not send this
+</li><li>GPRMC minimum recommend data
+</li><li>GPRMB minimum recommended data when following a route
+</li><li>GPVTG vector track and speed over ground
+</li><li>GPWPL waypoint data (only when active goto)
+</li><li>GPXTE cross track error
+</li></ul>
+
+In addition Garmin receivers send the following Proprietary Sentences:
+
+<ul>
+<li>PGRME (estimated error) - not sent if set to 0183 1.5
+</li><li>PGRMM (map datum)
+</li><li>PGRMZ (altitude)
+</li><li>PSLIB (beacon receiver control)
+</li></ul>
+
+The new etrex summit sends a $HCHDG sentence for its compass output.
+
+<p>This list is specific to the handheld units.  Other Garmin units may
+send other sentences and some use proprietary sentences to send control
+commands to the units themselves. Note that Garmin converts lat/lon
+coordinates to the datum chosen by the user when sending this data.  This
+is indicated in the proprietary sentence PGRMM.  This can help programs
+that use maps with other datums but is not a NMEA standard.  Be sure
+and set your datum to WGS84 when commuicating to other NMEA devices.
+
+</p><p>It is possible to just log view the information presented on the NMEA
+interface using a simple terminal program.  If the terminal program can
+log the session then you can build a history of the entire session into
+a file.  More sophisticated logging programs can filter the messages to
+only certain sentences or only collect sentences at prescribed intervals.
+Some computer programs that provide real time display and logging actually
+save the log in an ascii format that can be viewed with a text editor or
+used independently from the program that generated it.
+
+</p><p>NMEA has its own version of essential gps pvt (position, velocity,
+time) data.  It is called RMC, The Recommended Minimum, which  might
+look like:
+</p><pre>$GPRMC,123519,A,4807.038,N,01131.000,E,022.4,084.4,230394,003.1,W*43
+
+With an interpretation as follows:
+
+     RMC          Recommended Minimum sentence C
+     123519       Fix taken at 12:35:19 UTC
+     A            Status A=active
+     4807.038,N   Latitude 48 deg 07.038' N
+     01131.000,E  Longitude 11 deg 31.000' E
+     022.4        Speed over the ground in knots
+     084.4        Track angle in degrees True
+     230394       Date - 23rd of March 1994
+     003.1,W      Magnetic Variation
+     *43          The checksum data, always begins with *
+</pre>
+
+<h4>NMEA input</h4>
+
+Many of the Garmin units also support an NMEA input mode. While not
+too many programs support this mode it does provide a standardized way
+to update or add waypoint and route data.  Note that there is no
+handshaking or commands in NMEA mode so you just send the data in the
+correct sentence and the unit will accept the data and add or
+overwrite the information in memory.  If the waypoint name is the same
+you will overwrite existing data but no warning will be issued.  The
+sentence construction is identical to what the unit downloads so you
+can, for example, capture a WPL sentence from one unit and then send
+that same sentence to another unit but be careful if the two units
+support waypoint names of different lengths since the receiving unit
+might truncate the name and overwrite a waypoint accidently.  If you
+create a sentence from scratch you should create a correct checksum.
+Be sure you know and have set you unit to the correct datum.  A WPL
+sentence looks like:
+
+<pre>$GPWPL,4807.038,N,01131.000,E,WPTNME*31
+
+With an interpretation of:
+
+     WPL         Waypoint Location
+     4807.038,N  Latitude
+     01131.000,E Longitude
+     WPTNME      Waypoint Name
+     *31         The checksum data, always begins with *
+</pre>
+
+<a name="garmin">
+<h3>Garmin mode</h3></a>
+
+Garmin mode is a bi-directional binary proprietary interface protocol
+that is used by Garmin and many third party vendors do communicate
+directly with a Garmin receiver.  All of the handheld units understand
+Garmin protocol but may not understand or respond to a specific
+command in that protocol.  For example, if you were to try and store
+altitude information in a waypoint on a unit that cannot store altitude
+information then this command would fail.  Garmin mode includes a
+set of published API (Application Programming Interface) specifications
+and other commands that are not published or made public in any fashion
+except as used by a Garmin product.  There are other commands that
+are not even used by a Garmin product and are probably used by internal
+test groups and custom test equipment at the Garmin factory.  It is
+beyond the scope of this manual to describe the detailed interface
+specification.  A manual describing the published interface specifications
+is available for downloading at the Garmin site. In addition some of
+the undocumented commands and features are available from web sources. 
+
+<p>Some of the things that you might be able to do using Garmin protocol
+include:
+</p><ol>
+<li>getting the version number of the software.
+</li><li>Finding out the capabilities of the unit.
+</li><li>Uploading or downloading waypoint data.
+</li><li>Uploading or downloading Track data.
+</li><li>Uploading or downloading Route data.
+</li><li>Uploading or downloading Almanac data.
+</li><li>Downloading the current gps time.
+</li><li>Downloading the current gps position.
+</li><li>Uploading a new release of the firmware.
+</li><li>Uploading a set of maps.
+</li><li>Downloading a screen snapshot.
+</li><li>Receive a complete PVT solution in real time.
+</li></ol>
+
+Older multiplexing units cannot do many of the items in the list.
+Specifically they cannot do item 2, or any item beyond 8 in the above
+list. The G-12 family cannot do items above 9 but this could change
+with new firmware releases.
+
+<h4>User data backup</h4>
+
+<p>The most often used capabilities include the backup of critical
+user data such as waypoints and routes.  To do this you would need to
+secure a Garmin capable program.  These are available from Garmin or
+several third party sources.  There are programs for pc's running dos,
+or windows, for macs, for unix, and for palm pilots.  Once you have
+the correct program you can place your unit in Garmin mode and set the
+baud rate to 9600.  Generally all programs accept this baud rate but
+some may support other rates and even change the rate. Cable the unit
+to the computer and make sure the computer program is set to the
+correct serial port and the baud rate to 9600.  The standard serial
+port settings are 8N1, 8 bit data, no parity, 1 stop bit.  Do not
+use xon/xoff since this may interfere with proper transfer of binary
+data.  If the program cannot access the unit then check to ensure some
+other program is not using the port (the palm sync program is notorious
+for this) and that the port is configured correctly.  This protocol
+is binary and requires handshaking so all three wires need to be hooked
+up correctly.  Perhaps a null model adapter may be required to get the
+receive and transmit signals hooked up properly.
+
+</p><p>You cannot modify individual waypoints or routes using this
+interface.  Instead you load the full set of routes or the full set of
+waypoints.  If you wish to revise certain data you should download the
+full set and the revise the data you wish on your computer, clear all
+the waypoint data, and then reload the full set back.  Otherwise you
+may get unpredictable results on some units.  Most units will simply
+overwrite waypoints with the same name but the emap will create a new
+waypoint if the location is different.  This can make updating a
+waypoint a bit frustrating.  Similarly you load the full tracklog.  On
+units with multiple tracklogs you may find them all concatenated
+together on download.  Some programs may be able to upload saved logs
+directly but some may not.  On units that support the uploading of
+maps the rule is similar. You must assemble all of the maps you wish
+to upload and then send them all at once replacing the previous
+upload.
+
+</p><p>Of course, the data in the computer program need not originate in
+your gps.  It is quite possible, in some programs, to import external
+data to the program for later uploading or to edit the data files
+directly to provide this new information.  It is also useful to modify
+and add comment data to waypoints using a computer keyboard instead of
+toggling it in with the unit keypad.  Be aware that waypoints are
+always interpreted as using the WGS-84 datum for this interface.
+
+</p><h4>Unit to Unit transfer</h4>
+
+<p>One interesting use for this protocol is to transfer information
+between units.  To do this you need a Garmin to Garmin cable (available from
+Garmin and other sources) to hook the two units together.  One of the units
+is placed in Host mode and the other unit sends commands to upload and
+download data.  The commands are shown on your units menu.  They may
+include:
+</p><ol>
+<li>RQST/SEND ALL USR
+</li><li>RQST/SEND CFG - configuration
+</li><li>RQST/SEND PRX - Proximity alarm data
+</li><li>RQST/SEND RTE - Routes
+</li><li>RQST/SEND TRK - Track Log
+</li><li>RQST/SEND WPT - Waypoints
+</li><li>RQST/SEND ALM - Almanac
+</li></ol>
+The emap and etrex do not support this mode.  Other units may not work
+correctly in this mode or may not support some commands.  For example
+a G-III does not have proximity alarms.  The G-38 and the G-12 can
+talk to each other but the G-38 will not be able to support waypoint
+icons and you can easily overflow the track log on a 38 with the
+tracklog on a 12.  It is also possible to use a computer as an
+intermediary for this transfer by moving the data from the unit to
+the computer and then uploading it to the target platform.  Some Palm
+pilot programs even support the host mode so that they can serve as
+a temporary storage point for gps user data.
+
+<h4>Firmware Upgrade</h4>
+
+Garmin releases firmware upgrades for all of their twelve channel
+units to fix bugs and to add functionality.  These upgrades are
+available from the Garmin web site and are free so long as you agree
+with the terms and conditions.  They come with the appropriate program
+for pc platforms and are only supported by Garmin.  There is no third
+party source and users on Macintosh units will have to find a friend
+to do the upgrade or use a pc emulator.  Be careful that you only try
+and use the firmware for you specific unit, or you could break your
+unit completely and have to send it back to Garmin for repair.  The
+older multiplex units cannot be upgraded in this fashion and if needed
+they must be returned to Garmin for any upgrades.  Be sure and read the
+instructions that accompany the upgrade at the Garmin site.
+
+<p>To ensure success make sure you download the upgrade using a binary
+mode.  It comes as a zip file so if it unzips correctly you can be
+sure you downloaded it correctly.  Make sure you have a good
+connection to the gps.  Try one of the Garmin interface programs to
+backup your data.  Generally an upgrade does not lose user data but
+this is not always the case so it is a good idea to back it up.  Leave
+the unit in Garmin mode for the upgrade.  Your pc baud rate should be
+set to "maximum rate" possible so that the program can increase the
+baud rate to minimize the download time.  Expect to lose any
+customization that you may have performed on your unit.  Be sure you
+have fresh batteries in the unit.  Writing the firmware into the prom
+can use significant battery power and if the batteries are weak you
+may not get a good load or you may start out with a seemingly good
+load that will fail later.  Do not abort the process once it has
+begun.  It can take several minutes to do the upgrade so be patient.
+If the upgrade fails, try it again.  You must get an good upgrade
+before your unit will be operational again.
+
+</p><p>If you lose power or connection during the upgrade you may have a
+unit without any code at all.  If you were to attempt to power up the
+unit it will tell you the firmware is missing.  Some have reported
+that this happened some time later.  This is usually caused by weak
+batteries that were not able to burn the new code in the machine. To
+recover perform these steps:
+</p><ol>
+<li>Connect your cable to the computer.
+</li><li>Get the computer ready to load the firmware but don't press ENTER.
+</li><li>Turn on the GPS and then press the ENTER key on your computer.
+</li><li>Watch - The program should begin to load the new firmware
+</li></ol>
+
+<p>If you are unsuccessful then call Garmin and arrange to return your
+unit for them to upgrade.  If you feel that the upgrade has a bug in
+it and the older release is better you can generally use an earlier
+upgrade to downgrade your unit.  Garmin generally does not keep older
+versions available but they are often available on the net from other
+users.
+
+</p><h4>PVT data</h4>
+
+Some of the Garmin receivers support a PVT mode as part of the Garmin
+mode.  If you are using a computer program that supports this then you
+can remain in Garmin mode even while running your real time mapping
+application.  You set your unit to Garmin mode and then select this
+solution from the menus in the application.  Delorme mapping products
+support this mode.  This is an advantage in that you don't need to
+switch modes and you can leave your interface at 9600 baud which makes
+the real time response a bit faster.  The update interval is 1 second
+and this mode does not require handshaking nor does it support
+retransmission of data.  The following data is typically included as
+part of the pvt structure in the D800 message:
+<ul>
+<li>alt - Altitude above WGS-84 ellipsoid
+</li><li>epe - total predicted error (2 sigma meters)
+</li><li>eph - horizontal position error
+</li><li>epv - vertical position error
+</li><li>fix - type of position fix
+</li><li>tow - time of week (seconds)
+</li><li>posn - lat/lon (radians)
+</li><li>east - velocity east (meters/sec)
+</li><li>north - velocity north (meters/sec)
+</li><li>up - velocity up (meters/sec)
+</li><li>msl_height - height of WGS-84 ellipsoid above MSL (meters)
+</li><li>leap_seconds - difference between gps time and UTC (seconds)
+</li><li>wn_days - week number days
+</li></ul>
+
+<h4>Undocumented modes</h4>
+
+The Garmin Interface specification defines much of the exact interface
+requirements for Garmin mode.  However, there are many things that are
+in the interface that are not described in this manual.  Garmin has 
+indicated that these are for test purposes and are not to be used by
+customers.  They may also be changed from release to release and
+may only work with a particular test setup. However, many of these
+modes have been discovered and decoded by third party programmers.
+Such additional features such as screen captures fall into this 
+catagory.  One vendor has actually managed to get the pseudo range
+data out of the Garmin 12 family and provides a post processing 
+capability with these units by collecting data on a pc in real time
+for later processing thereby opening the possiblility of using this
+unit for surveying applications.
+
+<a name="beacon">
+<h3>DGPS mode</h3></a>
+
+All Garmin receivers support DGPS.  DGPS is a method of improving accuracy
+your receiver by adding a local reference station to augment the information
+available from the satellites.  This station transmits correction data
+in real time that is received by a separate box, called a beacon receiver, to
+send correction information to the gps receiver.
+
+Most folks fabricate a custom cable to work with the beacon receiver.
+Here is a diagram for a fairly complicated version, but you may not
+need a setup that is this complicated depending on what else you may
+be doing.  <center><img src="garmin%20proprietary%20interface_files/DBR.gif"></center> For simple dgps
+connections you can just wire a beacon receiver output signal along
+with its ground to the data input terminals of the gps.  If you need
+to be able to control the beacon receiver from the gps receiver then
+you will also need to send the ouput for the gps receiver to the
+beacon receiver.  A standard computer interface cable can usually be
+used for this connection.  If you also need to talk to a pc at the
+same time things start to get a little more complicated.  To talk to a
+pc in NMEA mode you can simply send the output of the gps to both
+units.  Wire the output signal to the input on the computer and the
+input on the beacon receiver.  There is sufficient power in the signal
+from the Garmin to drive both units and even a third item.  Note if
+the beacon receiver doesn't need to receive commands from the gps then
+there is no reason to send the signal both places but the ground wire
+is still needed.  Finally if the gps needs to talk to the pc in Garmin
+mode and also the the beacon receiver you will need a switch to permit
+the beacon receiver to transmit difference signals or the pc to interact
+with the gps.  You won't be able to do both at the same time.  This should
+not present any real problems since the bi-directional Garmin mode is used
+to upload and download waypoint, route, and track data which does not
+need the beacon receiver to be operational.
+
+
+<p>*** More To be supplied
+
+
+<a name="text">
+</a></p><h3><a name="text">Text Mode</a></h3>
+
+Text mode is a simple output mode that supplies velocity and position
+information in realtime. Currently this is primarily used by certain
+digital cameras to include this data on the picture.  In the future
+many other uses will be found for this mode which requires very little
+processing on the part of the device receiving the data.  An example
+is shown below.
+
+<p>@000607204655N6012249E01107556S015+00130E0021N0018U0000
+<br>@yymmddhhmmss Latitude Longitude error Altitude EWSpd NSSpd VSpd 
+
+</p><p>Each item is of fixed length making parsing by just counting the 
+number of characters an easy task. It is grouped by use permitting a
+digital camera, for example, to just read the first 30 characters and
+report the time and position.  Some of the data will require some
+programming to make meaningful for most users, such has the speed 
+which is devided into the X, Y, and Z components.  This is the only
+format that provides vertical speed which should be a great boon
+for ballonists.
+
+</p><p>A more formal description of the fields are:
+<table border="1">
+<tbody><tr>
+<th colspan="2">FIELD DESCRIPTION:</th><th>WIDTH:</th><th>NOTES:</th>
+</tr><tr>
+<td>&nbsp;</td><td>Sentence start</td><td>1</td><td>Always '@'</td>
+</tr><tr>
+<td rowspan="6" width="6"><center>T<br>I<br>M<br>E<br></center></td>
+<td>Year</td><td>2</td><td>Last two digits of UTC year</td></tr><tr>
+<td>Month</td><td>2</td><td>UTC month, "01".."12"</td></tr><tr>
+<td>Day</td><td>2</td><td>UTC day of month, "01".."31"</td></tr><tr>
+<td>Hour</td><td>2</td><td>UTC hour, "00".."23"</td></tr><tr>
+<td>Minute</td><td>2</td><td>UTC minute, "00".."59"</td></tr><tr>
+<td>Second</td><td>2</td><td>UTC second, "00".."59"</td></tr><tr>
+
+<td rowspan="8" width="6"><center>P<br>O<br>S<br>I<br>T<br>I<br>O<br>N</center>
+</td>
+<td>Latitude hemisphere</td><td>1</td><td>'N' or 'S'</td></tr><tr>
+<td>Latitude position</td><td>7</td><td>WGS84 ddmmmmm, with an implied
+                                        decimal after the 4th digit</td></tr><tr>
+<td>Longitude hemishpere</td><td>1</td><td>'E' or 'W'</td></tr><tr>
+<td>Longitude position</td><td>8</td><td>WGS84 dddmmmmm with an implied
+                                         decimal after the 5th digit</td></tr><tr>
+<td>Position status</td><td>1</td><td>'d' if current 2D differential GPS 
+                                    position<br>
+                                    'D' if current 3D differential GPS 
+                                    position<br>
+                                    'g' if current 2D GPS position<br>
+                                    'G' if current 3D GPS position<br>
+                                    'S' if simulated position<br>
+                                    '_' if invalid position</td></tr><tr>
+<td>Horizontal posn error</td><td>3</td><td>EPH in meters</td></tr><tr>
+<td>Altitude sign</td><td>1</td><td>'+' or '-'</td></tr><tr>
+<td>Altitude</td><td>5</td><td>Height above or below mean
+                                sea level in meters</td></tr><tr>
+<td rowspan="6" width="6"><center>V<br>E<br>L<br>O<br>C<br>I<br>T<br>Y</center>
+</td>
+<td>East/West velocity<br>direction</td><td>1</td><td>'E' or 'W'</td></tr><tr>
+<td>East/West velocity<br>magnitude</td><td>4</td><td>
+Meters per second in tenths, ("1234" = 123.4 m/s)</td></tr><tr>
+<td>North/South velocity<br>direction</td><td>1</td><td>'N' or 'S'</td></tr><tr>
+<td>North/South velocity<br>magnitude</td><td>4</td><td>Meters
+per second in tenths, ("1234" = 123.4 m/s)</td></tr><tr>
+<td>Vertical velocity<br>direction</td><td>1</td><td>'U' (up) or 'D' (down)
+</td></tr><tr>
+<td>Vertical velocity<br>magnitude</td><td>4</td><td>Meters
+per second in hundredths, ("1234" = 12.34 m/s)</td></tr><tr>
+<td>&nbsp;</td>
+<td>Sentence end</td><td>2</td><td>Carriage return, '0x0D', and
+                                    line feed, '0x0A'</td>
+</tr></tbody></table>
+
+</p><p>Notes on the table:
+</p><ul>
+<li>If a numeric value does not fill its entire field width, the field 
+is padded with leading '0's (eg. an altitude of 50 meters above MSL 
+will be output as "+00050").
+
+</li><li>Any or all of the data in the text sentence (except for the
+sentence start and sentence end fields) may be replaced with
+underscores to indicate invalid data.
+</li></ul>
+
+<h5>revision</h5>
+00/6/4 initial release
+<br>00/6/5 revised NMEA section based partially on user feedback
+<br>00/6/12 added text data and pvt data.
+<br>00/7/14 added some dgps stuff and error recovery for softare download
+<br>00/7/29 added cable drawing and NMEA input mode.
+<br>01/1/8 added NMEA 1.5 data.
+
+
+
+<p><a href="http://www.gpsinformation.org/dale/wgarmin.htm#toc">Return to TOC</a>
+
+
+
+
+
+
+
+
+
+
+
+</p></body></html>

@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using LiveAnalyser.Controls.WaypointsControls;
+
+namespace LiveAnalyser.Data
+{
+    [Serializable]
+    class Waypoints
+    {
+        /// <summary>
+        /// Positions by name
+        /// </summary>
+
+        internal Dictionary<string, WayPoint> Waypoints = new Dictionary<string, WayPoint>();
+
+
+        internal void Clear() 
+        {
+            Waypoints.Clear();
+        }
+    }
+}
